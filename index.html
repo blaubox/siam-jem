@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIAM JEM</title>
+  <link rel="icon" href="images/siam-jem.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'aktura';
+      src: url('fonts/Aktura-Regular.woff2') format('woff2'),
+           url('fonts/Aktura-Regular.woff') format('woff'),
+           url('fonts/Aktura-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+      font-style: normal;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red: #7a0404;
+      --red-bright: #c90707;
+      --black: #0a0a0a;
+      --gray: #1a1a1a;
+      --text: #e0dcd5;
+      --text-dim: rgba(224, 220, 213, 0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      letter-spacing: 0.03em;
+    }
+
+    /* ---- scrollbar ---- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+    /* ---- barb wire ---- */
+    .barb-top, .barb-bottom {
+      position: fixed;
+      left: 0; right: 0;
+      height: 32px;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .barb-top {
+      top: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='32' viewBox='0 0 120 32'%3E%3Cpath d='M0,12 Q15,8 30,13 Q45,18 60,12 Q75,6 90,13 Q105,18 120,12' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cpath d='M0,20 Q15,24 30,19 Q45,14 60,20 Q75,26 90,19 Q105,14 120,20' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cline x1='30' y1='13' x2='20' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='13' x2='40' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='20' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='40' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='50' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='70' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='50' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='70' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='80' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='100' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='80' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='100' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+    }
+    .barb-bottom {
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='32' viewBox='0 0 120 32'%3E%3Cpath d='M0,12 Q15,8 30,13 Q45,18 60,12 Q75,6 90,13 Q105,18 120,12' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cpath d='M0,20 Q15,24 30,19 Q45,14 60,20 Q75,26 90,19 Q105,14 120,20' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cline x1='30' y1='13' x2='20' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='13' x2='40' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='20' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='40' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='50' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='70' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='50' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='70' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='80' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='100' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='80' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='100' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+      transform: rotate(180deg);
+    }
+
+    /* ---- audio controls ---- */
+    .audio-wrapper {
+      position: fixed;
+      top: 36px;
+      left: 10px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: rgba(10,10,10,0.85);
+      border: 1px solid rgba(122,4,4,0.4);
+      border-radius: 6px;
+    }
+    .audio-controls button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 2px 4px;
+      line-height: 1;
+    }
+    .audio-controls button:hover { color: var(--red-bright); }
+    .audio-controls input[type="range"] {
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--gray);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    .audio-controls input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+    }
+    .audio-controls input[type="range"]::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+    }
+    .vol-slider { width: 60px; }
+
+    /* ---- now playing ---- */
+    .now-playing {
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      line-height: 1.3;
+      text-align: center;
+      white-space: nowrap;
+      margin-left: 4px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(122,4,4,0.3);
+    }
+    .now-playing span { color: var(--red-bright); }
+
+    /* ---- nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 2rem 2rem 1.25rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .site-logo {
+      font-family: 'aktura', serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      text-transform: lowercase;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 4px;
+      pointer-events: none;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-left: 1.75rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--red-bright); }
+
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); transition: 0.3s; }
+
+    /* ---- sections ---- */
+    section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--red-bright);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-family: 'aktura', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 3rem;
+      text-transform: lowercase;
+    }
+    .section-divider {
+      width: 60px; height: 2px;
+      background: var(--red);
+      margin-bottom: 2rem;
+    }
+
+    /* ---- hero ---- */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .hero-title {
+      font-family: 'aktura', serif;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.2em;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.8rem, 2vw, 1.1rem);
+      color: var(--text-dim);
+      letter-spacing: 0.3em;
+      margin-bottom: 2.5em;
+    }
+
+    .hero-links {
+      display: flex; flex-wrap: wrap;
+      gap: 0.75rem; justify-content: center;
+    }
+
+    .hero-links a {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.8em 2em;
+      border: 1px solid rgba(224,220,213,0.2);
+      border-radius: 2em;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+
+    .hero-links a:hover {
+      background: rgba(201,7,7,0.15);
+      border-color: var(--red-bright);
+      box-shadow: 0 0 30px rgba(201,7,7,0.15);
+    }
+
+    .hero-links a.primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    .hero-links a.primary:hover {
+      background: var(--red-bright);
+      border-color: var(--red-bright);
+      box-shadow: 0 0 35px rgba(201,7,7,0.3);
+    }
+
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.5rem;
+      color: var(--text-dim);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    .scroll-indicator .arrow { font-size: 0.8rem; }
+
+    @keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    /* ---- about ---- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--gray);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      filter: grayscale(0.8) contrast(1.2);
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
+    }
+
+    .about-text p {
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ---- music ---- */
+    #music { background: linear-gradient(to bottom, var(--black), #0d0d0d, var(--black)); }
+
+    .discography {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .album {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .album:hover { transform: translateY(-6px); }
+
+    .album-cover {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--gray);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .album-cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.6) contrast(1.3);
+    }
+
+    .album-cover::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(224,220,213,0.06);
+      border-radius: 4px;
+    }
+
+    .album-title {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .album-year {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+
+    .stream-links {
+      display: flex; flex-wrap: wrap;
+      gap: 0.75rem; justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .stream-links a {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.65em 1.5em;
+      border: 1px solid rgba(224,220,213,0.12);
+      border-radius: 2em;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .stream-links a:hover {
+      border-color: var(--red-bright);
+      background: rgba(201,7,7,0.08);
+    }
+
+    /* ---- tour ---- */
+    .tour-list { display: flex; flex-direction: column; }
+
+    .tour-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(224,220,213,0.06);
+      transition: background 0.2s;
+    }
+
+    .tour-item:first-child { border-top: 1px solid rgba(224,220,213,0.06); }
+
+    .tour-date { font-size: 0.65rem; color: var(--red-bright); font-weight: 700; letter-spacing: 0.05em; }
+    .tour-venue { font-size: 0.8rem; }
+    .tour-location { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+    .tour-cta a {
+      display: inline-block;
+      padding: 0.5em 1.25em;
+      border: 1px solid var(--red);
+      border-radius: 2em;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .tour-cta a:hover { background: var(--red); color: #fff; }
+    .tour-sold-out a { opacity: 0.3; pointer-events: none; border-color: var(--text-dim); }
+    .tour-sold-out a::after { content: ' — SOLD OUT'; color: var(--text-dim); }
+
+    /* ---- gallery ---- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.7) contrast(1.2);
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .gallery-grid .gallery-item {
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 1;
+      background: var(--gray);
+      position: relative;
+    }
+
+    .gallery-grid .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    .gallery-item:hover img {
+      filter: grayscale(0.3) contrast(1.1);
+      transform: scale(1.05);
+    }
+
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.video-item { overflow: visible; aspect-ratio: auto; }
+    .video-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 1;
+    }
+    .video-overlay.hidden { display: none; }
+    .video-play-icon {
+      font-size: 3rem; color: var(--text);
+      opacity: 0.8; text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    /* ---- signup ---- */
+    #signup {
+      text-align: center;
+      background: linear-gradient(to bottom, var(--black), #0a0202, var(--black));
+      padding: 6rem 2rem;
+      max-width: 100%;
+    }
+
+    #signup .inner { max-width: 500px; margin: 0 auto; }
+
+    #signup p {
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .signup-form input {
+      flex: 1;
+      padding: 0.9rem 1.25rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(224,220,213,0.12);
+      border-radius: 2em;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .signup-form input:focus { border-color: var(--red); }
+    .signup-form input::placeholder { color: var(--text-dim); text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.08em; }
+
+    .signup-form button {
+      padding: 0.9rem 1.75rem;
+      background: var(--red);
+      border: none;
+      border-radius: 2em;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .signup-form button:hover { background: var(--red-bright); }
+
+    /* ---- social ---- */
+    #social { text-align: center; }
+
+    .social-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(224,220,213,0.12);
+      border-radius: 50%;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: all 0.25s;
+    }
+
+    .social-grid a:hover {
+      border-color: var(--red-bright);
+      background: rgba(201,7,7,0.1);
+      box-shadow: 0 0 25px rgba(201,7,7,0.15);
+      transform: translateY(-3px);
+    }
+
+    /* ---- footer ---- */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border-top: 1px solid rgba(224,220,213,0.04);
+    }
+
+    /* ---- mobile ---- */
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.95); padding: 1rem 2rem; gap: 0.75rem; }
+      .nav-links.open a { margin-left: 0; }
+
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .tour-item { grid-template-columns: 1fr; gap: 0.5rem; text-align: center; }
+      .tour-cta { margin-top: 0.5rem; }
+      .signup-form { flex-direction: column; }
+      .signup-form button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barb-top"></div>
+  <div class="barb-bottom"></div>
+  <audio id="bgm" src="images/song.mp3" autoplay loop></audio>
+
+  <div class="audio-wrapper">
+    <div class="site-logo">siam jem</div>
+    <div class="audio-controls">
+      <button id="playBtn" aria-label="Play/Pause">&#x23F8;</button>
+      <button id="muteBtn" aria-label="Mute">&#x1F50A;</button>
+      <input type="range" id="volumeSlider" class="vol-slider" min="0" max="1" step="0.05" value="0.15" />
+      <div class="now-playing">currently playing<br /><span>colossus</span></div>
+    </div>
+  </div>
+  <!-- nav -->
+  <nav>
+    <div class="nav-links">
+      <a href="#featured">Latest</a>
+      <a href="#music">Music</a>
+      <a href="#tour">Shows</a>
+      <a href="#about">About</a>
+      <a href="#gallery">BTS</a>
+      <a href="#signup">Subscribe</a>
+    </div>
+    <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- hero -->
+  <section class="hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">siam jem</h1>
+      <p class="hero-tagline">Female-Rage-Dream-Punk</p>
+      <div class="hero-links">
+        <a href="https://open.spotify.com/artist/6Pb4W3v4Y4kxm2v1EfnGrR" target="_blank" rel="noopener noreferrer" class="primary">Listen Now</a>
+        <a href="#tour">Shows</a>
+        <a href="#music">Discography</a>
+        <a href="https://www.depop.com/products/junkvault-siam-jem-eyeball-tshirt-available/?utm_source=twitter&utm_campaign=client-share&utm_medium=social&utm_term=mikaashr" target="_blank" rel="noopener noreferrer">Store</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <span class="arrow">&#x2193;</span>
+    </div>
+  </section>
+
+  <!-- featured single -->
+  <section id="featured" style="padding-top:8rem;padding-bottom:2rem;max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">&#x2716; Latest Descent</div>
+    <h2 class="section-title">New Single</h2>
+    <div class="section-divider" style="margin:0 auto 2rem;"></div>
+    <p style="font-weight:300;font-size:0.9rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.6;">Our latest offering from the void. Listen below.</p>
+    <div style="max-width:400px;margin:0 auto;">
+      <iframe style="border-radius:12px;border:none;width:100%;height:352px;" src="https://open.spotify.com/embed/album/7BQQ3uLHr0xDyRiJyr8Yws?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- music -->
+  <section id="music">
+    <div class="section-label">&#x2716; Chapter I</div>
+    <h2 class="section-title">Discography</h2>
+    <div class="section-divider"></div>
+
+    <div class="discography">
+      <a href="https://open.spotify.com/album/0jyYuZIofNjMVEWSCcGgGh" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+        <div class="album">
+          <div class="album-cover">
+            <img src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0248edd8f3544c4d950f436b5f" alt="Evil Eye" loading="lazy" />
+          </div>
+          <div class="album-title">Evil Eye</div>
+          <div class="album-year">2025</div>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/album/7BQQ3uLHr0xDyRiJyr8Yws" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+        <div class="album">
+          <div class="album-cover">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e028c5f8031d3730d50aa39976a" alt="Angelface" loading="lazy" />
+          </div>
+          <div class="album-title">Angelface</div>
+          <div class="album-year">2025</div>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/album/5WcAHvU1UNcKpdlf946Axi" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+        <div class="album">
+          <div class="album-cover">
+            <img src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e024d422ae43f3fbcada86b834a" alt="Colossus" loading="lazy" />
+          </div>
+          <div class="album-title">Colossus</div>
+          <div class="album-year">2024</div>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/album/14sAUG2DHpQRbRI4eZDjPw" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+        <div class="album">
+          <div class="album-cover">
+            <img src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0297aa9ad477c5a62b0d9bd2e8" alt="Ataraxia" loading="lazy" />
+          </div>
+          <div class="album-title">Ataraxia</div>
+          <div class="album-year">2024</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="stream-links">
+      <a href="https://open.spotify.com/artist/6Pb4W3v4Y4kxm2v1EfnGrR" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a href="https://music.apple.com/us/artist/siam-jem/1300401807" target="_blank" rel="noopener noreferrer">Apple Music</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+      <a href="https://www.youtube.com/@siamjem19" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://soundcloud.com/user-118744940" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+    </div>
+  </section>
+
+  <!-- tour -->
+  <section id="tour">
+    <div class="section-label">&#x2716; Chapter II</div>
+    <h2 class="section-title">Shows</h2>
+    <div class="section-divider"></div>
+
+    <div class="tour-list">
+      <div class="tour-item">
+        <div class="tour-date">JUL 11</div>
+        <div>
+          <div class="tour-venue">The Haven Pomona</div>
+          <div class="tour-location">296 W 2nd St, Pomona, CA 91766, USA &middot; 6:30–11:00 PM</div>
+        </div>
+        <div class="tour-cta"><a href="https://www.thehavenpomona.com/event-details/mommy-mommy-siam-jem-demon-pussy-pegzilla-honk" target="_blank" rel="noopener noreferrer">Tickets</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about">
+    <div class="section-label">&#x2716; Chapter III</div>
+    <h2 class="section-title">About Us</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="images/groupphoto.png" alt="Siam Jem" loading="lazy" />
+      </div>
+      <div class="about-text">
+        <p>Siam Jem is a female-fronted band, from Los Angeles, CA, that combines the atmospheric qualities of shoegaze with an edgy, punk-inspired attitude, creating a sound they refer to as &ldquo;dream punk.&rdquo;</p>
+        <p>The band has spent the last year finishing up their newest release, featuring songs such as newest single &ldquo;Colossus&rdquo;. They also embarked on a 7 show tour of Japan in September of 2024 including stops in Tokyo, Kyoto, Osaka, and Fukuoka.</p>
+        <p>Siam Jem has previously shared the stage with multiple up-and-coming artists including Sir Chloe, Levitation Room, and Winona Forever.</p>
+        <p>Siam Jem is Mika Rabina on vocals/rhythm guitar, Minli Flynn on bass, Tommy Sweet on drums/back up vocals , &amp; Dane Mora on lead guitar/back up vocals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- gallery -->
+  <section id="gallery">
+    <div class="section-label">&#x2716; Chapter IV</div>
+    <h2 class="section-title">BTS</h2>
+    <div class="section-divider"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/2-person-photo-sitting.png" alt="Us" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/crowd.png" alt="Crowd" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/eagle-eye-photo.png" alt="Eagle Eye" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/singer.png" alt="Singer" loading="lazy" /></div>
+      <div class="gallery-item video-item">
+        <video class="bts-video" src="images/concert.mp4" playsinline preload="auto" controls style="width:100%;height:100%;object-fit:cover;"></video>
+        <div class="video-overlay">
+          <span class="video-play-icon">&#x25B6;</span>
+        </div>
+      </div>
+      <div class="gallery-item video-item">
+        <video class="bts-video" src="images/bts-clip.mp4" playsinline preload="auto" controls style="width:100%;height:100%;object-fit:cover;"></video>
+        <div class="video-overlay">
+          <span class="video-play-icon">&#x25B6;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- signup -->
+  <section id="signup">
+    <div class="inner">
+      <div class="section-label">&#x2716; Join the Congregation</div>
+      <h2 class="section-title">Descend Deeper</h2>
+      <div class="section-divider" style="margin: 0 auto 2rem;"></div>
+      <p>Subscribe to receive ritual announcements, exclusive recordings, and missives from the void. No light. Only sound.</p>
+      <form class="signup-form" onsubmit="event.preventDefault(); alert('Welcome to the void.');">
+        <input type="email" placeholder="your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- social -->
+  <section id="social">
+    <div class="section-label">&#x2716; Follow the Descent</div>
+    <h2 class="section-title">Summon</h2>
+    <div class="section-divider" style="margin: 0 auto 2rem;"></div>
+
+    <div class="social-grid">
+      <a href="https://www.instagram.com/siamjem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">&#x25C9;</a>
+      <a href="https://www.youtube.com/@siamjem19" target="_blank" rel="noopener noreferrer" aria-label="YouTube">&#x25B6;</a>
+      <a href="https://open.spotify.com/artist/6Pb4W3v4Y4kxm2v1EfnGrR" target="_blank" rel="noopener noreferrer" aria-label="Spotify">&#x266B;</a>
+      <a href="https://siamjem.bandcamp.com" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp">&#x24D0;</a>
+      <a href="https://soundcloud.com/user-118744940" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">&#x266C;</a>
+      <a href="https://www.tiktok.com/@siamjem" target="_blank" rel="noopener noreferrer" aria-label="TikTok">&#x2717;</a>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" style="text-align:center;">
+    <div class="section-label">&#x2716; Reach Out</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-divider" style="margin:0 auto 2rem;"></div>
+    <p style="font-weight:300;font-size:0.9rem;color:var(--text-dim);line-height:1.6;">
+      Booking &amp; inquiries:<br />
+      <a href="mailto:siamjemmgmt@gmail.com" style="color:var(--red-bright);text-decoration:none;font-weight:500;">siamjemmgmt@gmail.com</a>
+    </p>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    &copy; 2026 SIAM JEM. ALL RIGHTS RESERVED.
+  </footer>
+
+  <script>
+    const audio = document.getElementById('bgm');
+    const playBtn = document.getElementById('playBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isMuted = false;
+
+    audio.volume = 0.15;
+
+    function updatePlayBtn() {
+      playBtn.innerHTML = audio.paused ? '&#x25B6;' : '&#x23F8;';
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', updatePlayBtn);
+    audio.addEventListener('pause', updatePlayBtn);
+
+    audio.addEventListener('loadedmetadata', () => {
+      audio.currentTime = 0;
+    });
+
+    audio.addEventListener('canplay', () => {
+      audio.play().catch(() => {
+        const start = () => {
+          audio.play();
+          document.removeEventListener('click', start);
+          document.removeEventListener('scroll', start);
+          document.removeEventListener('touchstart', start);
+        };
+        document.addEventListener('click', start);
+        document.addEventListener('scroll', start);
+        document.addEventListener('touchstart', start);
+      });
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value;
+      if (audio.volume > 0 && isMuted) {
+        isMuted = false;
+        muteBtn.innerHTML = '&#x1F50A;';
+      }
+    });
+
+    muteBtn.addEventListener('click', () => {
+      isMuted = !isMuted;
+      audio.muted = isMuted;
+      muteBtn.innerHTML = isMuted ? '&#x1F507;' : '&#x1F50A;';
+    });
+
+    document.querySelectorAll('.gallery-item .bts-video').forEach(v => {
+      const parent = v.closest('.gallery-item');
+      const overlay = parent.querySelector('.video-overlay');
+      v.volume = 0.15;
+
+      overlay.addEventListener('click', () => v.play());
+
+      v.addEventListener('play', () => {
+        overlay.classList.add('hidden');
+        audio.pause();
+      });
+
+      v.addEventListener('pause', () => {
+        overlay.classList.remove('hidden');
+        if (!audio.ended) audio.play();
+      });
+    });
+  </script>
+
+</body>
+</html>
