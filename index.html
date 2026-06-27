@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIAM JEM</title>
-  <link rel="icon" href="images/siam-jem.png" type="image/png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='18' font-weight='700' fill='%23c90707'%3ESJ%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
@@ -54,11 +54,13 @@
     }
     .barb-top {
       top: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='32' viewBox='0 0 120 32'%3E%3Cpath d='M0,12 Q15,8 30,13 Q45,18 60,12 Q75,6 90,13 Q105,18 120,12' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cpath d='M0,20 Q15,24 30,19 Q45,14 60,20 Q75,26 90,19 Q105,14 120,20' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cline x1='30' y1='13' x2='20' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='13' x2='40' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='20' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='40' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='50' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='70' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='50' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='70' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='80' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='100' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='80' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='100' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+      background: url('images/barbwire.png') repeat-x;
+      background-size: auto 32px;
     }
     .barb-bottom {
       bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='32' viewBox='0 0 120 32'%3E%3Cpath d='M0,12 Q15,8 30,13 Q45,18 60,12 Q75,6 90,13 Q105,18 120,12' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cpath d='M0,20 Q15,24 30,19 Q45,14 60,20 Q75,26 90,19 Q105,14 120,20' stroke='%23e0dcd5' stroke-width='1.8' fill='none'/%3E%3Cline x1='30' y1='13' x2='20' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='13' x2='40' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='20' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='30' y1='19' x2='40' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='50' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='12' x2='70' y2='0' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='50' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='60' y1='20' x2='70' y2='32' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='80' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='13' x2='100' y2='1' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='80' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3Cline x1='90' y1='19' x2='100' y2='31' stroke='%23e0dcd5' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+      background: url('images/barbwire.png') repeat-x;
+      background-size: auto 32px;
       transform: rotate(180deg);
     }
 
@@ -437,7 +439,7 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      gap: 2px;
     }
 
     .gallery-grid img {
@@ -800,7 +802,7 @@
       <a href="https://open.spotify.com/artist/6Pb4W3v4Y4kxm2v1EfnGrR" target="_blank" rel="noopener noreferrer" aria-label="Spotify">&#x266B;</a>
       <a href="https://siamjem.bandcamp.com" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp">&#x24D0;</a>
       <a href="https://soundcloud.com/user-118744940" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">&#x266C;</a>
-      <a href="https://www.tiktok.com/@siamjem" target="_blank" rel="noopener noreferrer" aria-label="TikTok">&#x2717;</a>
+      <a href="https://www.tiktok.com/@siamjem" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style="font-family:Georgia,serif;font-weight:700;">T</a>
     </div>
   </section>
 
