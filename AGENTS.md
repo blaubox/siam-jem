@@ -4,8 +4,7 @@
 Plain HTML + CSS (single `index.html` file). No build tools, no dependencies.
 
 ## Fonts
-- **Aktura** (Fontshare, self-hosted in `fonts/`) — hero title ("siam jem"), all section titles (lowercase)
-- **UnifrakturMaguntia** (Google Fonts) — nav logo
+- **Aktura** (Fontshare, self-hosted in `fonts/`) — hero title ("siam jem"), all section titles (lowercase), top-left site logo
 - **Space Grotesk** (Google Fonts) — body text
 
 ## Running
@@ -54,12 +53,12 @@ Gothic/edgy — Junji Ito + DOOM crossover. Black background, deep red (`#7a0404
 ## Social links (all open in new tab)
 | Platform | URL | Status |
 |---|---|---|
-| Instagram | `instagram.com/siamjem/` | ⚠️ Guessed — confirm |
+| Instagram | `instagram.com/siamjem/` | ✅ Confirmed |
 | YouTube | `youtube.com/@siamjem19` | ✅ Set |
 | Spotify | Artist page | ✅ Set |
 | Bandcamp | `siamjem.bandcamp.com` | ⚠️ Guessed — confirm |
 | SoundCloud | `soundcloud.com/user-118744940` | ✅ Set |
-| TikTok | `tiktok.com/@siamjem` | ⚠️ Guessed — confirm |
+| TikTok | `tiktok.com/@siamjem` | ✅ Confirmed |
 
 ## Images
 All local files in `images/` — no more Unsplash placeholders.
@@ -73,6 +72,7 @@ All local files in `images/` — no more Unsplash placeholders.
 | `singer.png` | BTS gallery |
 | `concert.mp4` | BTS gallery (clickable video with native controls, low default volume) |
 | `song.mp3` | Background autoplay audio |
+| `barbwire.png` | Top/bottom barb wire borders |
 
 ## Font files (in `fonts/`)
 | File | Source |
@@ -87,8 +87,18 @@ All local files in `images/` — no more Unsplash placeholders.
 | Colossus (2024) | `album/5WcAHvU1UNcKpdlf946Axi` | `i.scdn.co/image/ab67616d00001e024d422ae43f3fbcada86b834a` |
 | Ataraxia (2024) | `album/14sAUG2DHpQRbRI4eZDjPw` | `i.scdn.co/image/ab67616d00001e0297aa9ad477c5a62b0d9bd2e8` |
 
+## Deployment
+- **Host**: Porkbun Static Hosting
+- **Domain**: `siamjem.com`
+- **FTP host**: `pixie-ss1-ftp.porkbun.com`
+- **FTP user**: `siamjem.com`
+- **FTP password**: `egBeGGCpsgLQpGuCG!4u`
+- **Deploy command** (run from repo root): `git add index.html images/ && git commit -m "update" && git push`
+- **FTP deploy fallback** (if GitHub Connect is down): Run the `deploy.ps1` script in this repo
+- **GitHub repo**: `github.com/blaubox/siam-jem` (main branch)
+- To update: `git push origin main` (if GitHub Connect is active) or upload via FTP
+
 ## Remaining to-do
-- [ ] Confirm/update Instagram, Bandcamp, TikTok social URLs
 - [ ] Replace Bandcamp streaming link (`#`)
 - [ ] Hook up signup form to a real mailing list
 - [ ] Update copyright year if needed
