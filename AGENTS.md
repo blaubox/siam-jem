@@ -98,6 +98,9 @@ All local files in `images/` — no more Unsplash placeholders.
 - **GitHub repo**: `github.com/blaubox/siam-jem` (main branch)
 - To update: `git push origin main` (if GitHub Connect is active) or upload via FTP
 
+## Barbwire
+The `barbwire.png` image has transparent edges — CSS `background-repeat` leaves visible gaps when tiled. The fix uses JavaScript to place overlapping `<img>` elements with `margin-right: -5px` inside `.barb-inner` divs. This creates seamless visual overlap without stretching the image. The `tileBarbwire()` function calculates how many tiles are needed based on viewport width and creates them on load.
+
 ## Remaining to-do
 - [ ] Replace Bandcamp streaming link (`#`)
 - [ ] Hook up signup form to a real mailing list
