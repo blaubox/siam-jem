@@ -52,15 +52,21 @@
       pointer-events: none;
       opacity: 0.5;
     }
+    .barb-inner {
+      display: flex;
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+    .barb-inner img {
+      height: 32px;
+      flex-shrink: 0;
+      display: block;
+    }
     .barb-top {
       top: 0;
-      background: url('images/barbwire.png') repeat-x;
-      background-size: auto 32px;
     }
     .barb-bottom {
       bottom: 0;
-      background: url('images/barbwire.png') repeat-x;
-      background-size: auto 32px;
       transform: rotate(180deg);
     }
 
@@ -603,8 +609,8 @@
 </head>
 <body>
 
-  <div class="barb-top"></div>
-  <div class="barb-bottom"></div>
+  <div class="barb-top" id="barbTop"><div class="barb-inner" id="barbTopInner"></div></div>
+  <div class="barb-bottom" id="barbBottom"><div class="barb-inner" id="barbBottomInner"></div></div>
   <audio id="bgm" src="images/song.mp3" autoplay loop></audio>
 
   <div class="audio-wrapper">
@@ -895,6 +901,24 @@
         if (!audio.ended) audio.play();
       });
     });
+    function tileBarbwire(id) {
+      const c = document.getElementById(id);
+      const i = new Image();
+      i.onload = () => {
+        const w = i.naturalWidth * (32 / i.naturalHeight);
+        const n = Math.ceil(window.innerWidth / w) + 2;
+        for (let e = 0; e < n; e++) {
+          const el = document.createElement('img');
+          el.src = 'images/barbwire.png';
+          el.alt = '';
+          el.style.cssText = 'height:32px;flex-shrink:0;margin-right:-5px;display:block;';
+          c.appendChild(el);
+        }
+      };
+      i.src = 'images/barbwire.png';
+    }
+    tileBarbwire('barbTopInner');
+    tileBarbwire('barbBottomInner');
   </script>
 
 </body>
