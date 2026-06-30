@@ -72,7 +72,8 @@ All local files in `images/` — no more Unsplash placeholders.
 | `singer.png` | BTS gallery |
 | `concert.mp4` | BTS gallery (clickable video with native controls, low default volume) |
 | `song.mp3` | Background autoplay audio |
-| `barbwire.png` | Top/bottom barb wire borders |
+| `barbwire.png` | (unused — SVG barb wire used instead) |
+| `bts-clip.mp4` | BTS gallery (clickable video) |
 
 ## Font files (in `fonts/`)
 | File | Source |
@@ -92,14 +93,10 @@ All local files in `images/` — no more Unsplash placeholders.
 - **Domain**: `siamjem.com`
 - **FTP host**: `pixie-ss1-ftp.porkbun.com`
 - **FTP user**: `siamjem.com`
-- **FTP password**: `egBeGGCpsgLQpGuCG!4u`
-- **Deploy command** (run from repo root): `git add index.html images/ && git commit -m "update" && git push`
-- **FTP deploy fallback** (if GitHub Connect is down): Run the `deploy.ps1` script in this repo
+- **FTP password**: Get from Porkbun dashboard → static hosting settings
 - **GitHub repo**: `github.com/blaubox/siam-jem` (main branch)
 - To update: `git push origin main` (if GitHub Connect is active) or upload via FTP
-
-## Barbwire
-The `barbwire.png` image has transparent edges — CSS `background-repeat` leaves visible gaps when tiled. The fix uses JavaScript to place overlapping `<img>` elements with `margin-right: -5px` inside `.barb-inner` divs. This creates seamless visual overlap without stretching the image. The `tileBarbwire()` function calculates how many tiles are needed based on viewport width and creates them on load.
+- **⚠️ URL Forwarding breaks static hosting** — Never enable URL Forwarding on a domain using Static Hosting; it removes the DNS A record and breaks the site. You'll need Porkbun support to re-sync DNS if this happens.
 
 ## Remaining to-do
 - [ ] Replace Bandcamp streaming link (`#`)
