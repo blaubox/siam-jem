@@ -320,6 +320,21 @@
       box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
     }
 
+    .tour-schedule {
+      margin: 0 auto 40px;
+      max-width: 720px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--gray);
+    }
+
+    .tour-schedule img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(0.8) contrast(1.2);
+    }
+
     .about-text p {
       font-weight: 300;
       font-size: 0.95rem;
@@ -436,6 +451,16 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: all 0.2s;
+    }
+    .tour-cta .free {
+      display: inline-block;
+      padding: 0.5em 1.25em;
+      border: 1px solid var(--red);
+      border-radius: 2em;
+      color: var(--text);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
     .tour-cta a:hover { background: var(--red); color: #fff; }
     .tour-sold-out a { opacity: 0.3; pointer-events: none; border-color: var(--text-dim); }
@@ -648,6 +673,7 @@
         <a href="#tour">Shows</a>
         <a href="#music">Discography</a>
         <a href="https://www.depop.com/products/junkvault-siam-jem-eyeball-tshirt-available/?utm_source=twitter&utm_campaign=client-share&utm_medium=social&utm_term=mikaashr" target="_blank" rel="noopener noreferrer">Store</a>
+        <a href="https://siamjem.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
       </div>
     </div>
     <div class="scroll-indicator">
@@ -715,7 +741,7 @@
     <div class="stream-links">
       <a href="https://open.spotify.com/artist/6Pb4W3v4Y4kxm2v1EfnGrR" target="_blank" rel="noopener noreferrer">Spotify</a>
       <a href="https://music.apple.com/us/artist/siam-jem/1300401807" target="_blank" rel="noopener noreferrer">Apple Music</a>
-      <a href="#" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+      <a href="https://siamjem.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
       <a href="https://www.youtube.com/@siamjem19" target="_blank" rel="noopener noreferrer">YouTube</a>
       <a href="https://soundcloud.com/user-118744940" target="_blank" rel="noopener noreferrer">SoundCloud</a>
     </div>
@@ -727,14 +753,18 @@
     <h2 class="section-title">Shows</h2>
     <div class="section-divider"></div>
 
+    <div class="tour-schedule">
+      <img src="images/schedule.jpg" alt="Show Schedule" loading="lazy" />
+    </div>
+
     <div class="tour-list">
       <div class="tour-item">
-        <div class="tour-date">JUL 11</div>
+        <div class="tour-date">OCT 15</div>
         <div>
-          <div class="tour-venue">The Haven Pomona</div>
-          <div class="tour-location">296 W 2nd St, Pomona, CA 91766, USA &middot; 6:30–11:00 PM</div>
+          <div class="tour-venue">The Glass House</div>
+          <div class="tour-location">200 W 2nd St, Pomona, CA 91766, USA</div>
         </div>
-        <div class="tour-cta"><a href="https://www.thehavenpomona.com/event-details/mommy-mommy-siam-jem-demon-pussy-pegzilla-honk" target="_blank" rel="noopener noreferrer">Tickets</a></div>
+        <div class="tour-cta"><a href="https://dice.fm/event/92rbxn-automatic-15th-oct-the-glass-house-pomona-tickets?utm_medium=partners_api&pid=a1331df1" target="_blank" rel="noopener noreferrer">Tickets</a></div>
       </div>
     </div>
   </section>
