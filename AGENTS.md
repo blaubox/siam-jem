@@ -11,15 +11,15 @@ Plain HTML + CSS (single `index.html` file). No build tools, no dependencies.
 Open `index.html` in any browser.
 
 ## Theme
-Gothic/edgy — Junji Ito + DOOM crossover. Black background, deep red (`#7a0404`) / bright red (`#c90707`) accents, dim parchment text (`#e0dcd5`). Google Fonts: Cinzel Decorative (logo/headings), Space Grotesk (body). Barb wire SVGs at top/bottom of screen.
+Gothic/edgy — Junji Ito + DOOM crossover. Black background, deep red (`#7a0404`) / bright red (`#c90707`) accents, dim parchment text (`#e0dcd5`). Aktura (self-hosted in `fonts/`) for logo/headings, Space Grotesk (Google Fonts) for body. Barb wire SVGs at top/bottom of screen.
 
 ## Section order (top to bottom)
 | # | ID | Heading | Notes |
 |---|---|---|---|
-| Hero | `#top` | — | Band name in Aktura (lowercase "siam jem"), tagline "Female-Rage-Dream-Punk", CTA buttons |
+| Hero | `#top` | — | Band name in Aktura (lowercase "siam jem"), tagline "Female-Rage-Dream-Punk", CTA buttons: Listen Now, Shows, Discography, Store, Bandcamp |
 | Featured | `#featured` | New Single | Spotify embed for **Angelface** album |
 | Discography | `#music` (Ch. I) | Discography | 4 albums from Spotify: Evil Eye, Angelface, Colossus, Ataraxia |
-| Shows | `#tour` (Ch. II) | Shows | Single show: Jul 11, 2026 at The Haven Pomona (296 W 2nd St, Pomona, CA) |
+| Shows | `#tour` (Ch. II) | Shows | Single show: Oct 15, 2026 at The Glass House (200 W 2nd St, Pomona, CA 91766) |
 | About | `#about` (Ch. III) | About Us | Group photo `images/groupphoto.png` + bio text |
 | BTS | `#gallery` (Ch. IV) | BTS | Photo grid + clickable video `concert.mp4` from `images/` folder |
 | Signup | `#signup` | Descend Deeper | Email form (placeholder, no backend) |
@@ -47,8 +47,8 @@ Gothic/edgy — Junji Ito + DOOM crossover. Black background, deep red (`#7a0404
 | Apple Music | `music.apple.com/us/artist/siam-jem/1300401807` | ✅ Set |
 | YouTube | `youtube.com/@siamjem19` | ✅ Set |
 | SoundCloud | `soundcloud.com/user-118744940` | ✅ Set |
-| Bandcamp | `#` | ❌ Placeholder |
-| Ticket link | `thehavenpomona.com/event-details/...` | ✅ Set |
+| Bandcamp | `siamjem.bandcamp.com` | ✅ Set |
+| Ticket link | `partiful.com/e/AhV0RiWK2ghhzI9FtoGJ` | ✅ Set |
 
 ## Social links (all open in new tab)
 | Platform | URL | Status |
@@ -74,6 +74,7 @@ All local files in `images/` — no more Unsplash placeholders.
 | `song.mp3` | Background autoplay audio |
 | `barbwire.png` | (unused — SVG barb wire used instead) |
 | `bts-clip.mp4` | BTS gallery (clickable video) |
+| `schedule.jpg` | Shows section (above tour dates) |
 
 ## Font files (in `fonts/`)
 | File | Source |
@@ -97,6 +98,7 @@ All local files in `images/` — no more Unsplash placeholders.
 - **GitHub repo**: `github.com/blaubox/siam-jem` (main branch)
 - To update: `git push origin main` (if GitHub Connect is active) or upload via FTP
 - **⚠️ URL Forwarding breaks static hosting** — Never enable URL Forwarding on a domain using Static Hosting; it removes the DNS A record and breaks the site. You'll need Porkbun support to re-sync DNS if this happens.
+- After making local changes to `index.html`, **always push to live** via `git push origin main` (and upload via FTP if GitHub Connect is not active).
 
 ## Remaining to-do
 - [ ] Replace Bandcamp streaming link (`#`)
