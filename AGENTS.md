@@ -19,7 +19,7 @@ Gothic/edgy — Junji Ito + DOOM crossover. Black background, deep red (`#7a0404
 | Hero | `#top` | — | Band name in Aktura (lowercase "siam jem"), tagline "Female-Rage-Dream-Punk", CTA buttons: Listen Now, Shows, Discography, Store, Bandcamp |
 | Featured | `#featured` | New Single | Spotify embed for **Angelface** album |
 | Discography | `#music` (Ch. I) | Discography | 4 albums from Spotify: Evil Eye, Angelface, Colossus, Ataraxia |
-| Shows | `#tour` (Ch. II) | Shows | Single show: Oct 15, 2026 at The Glass House (200 W 2nd St, Pomona, CA 91766) |
+| Shows | `#tour` (Ch. II) | Shows | Oct 15: The Glass House (Pomona, CA) · Nov 14: LOUD WOMEN Fest Tokyo X Too Hot to Be Cool (luma.com/lw-thtbc) |
 | About | `#about` (Ch. III) | About Us | Group photo `images/groupphoto.png` + bio text |
 | BTS | `#gallery` (Ch. IV) | BTS | Photo grid + clickable video `concert.mp4` from `images/` folder |
 | Signup | `#signup` | Descend Deeper | Email form (placeholder, no backend) |
